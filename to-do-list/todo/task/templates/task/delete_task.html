@@ -1,0 +1,9 @@
+<p>Confirm deletion of: {{task.title}}</p>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <button type="submit" name="Confirm">Confirm</button>
+</form>
+<a href="{% url 'task_list' %}"> 
+    <button type="submit" name="Cancel">Cancel</button>
+</a>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.1/slate/bootstrap.min.css"
+        integrity="sha512-vcxGhXoYp4V+Px82NLfIO/aoZjAXBnkVDNaII83WBgEe5bfPGD1wgUu9Av3+IzTh3ilPiEie5Zc21hrk84oBUg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <title>Weather App </title>
+  </head>
+
+  <div id="jumbotron" class="jumbotron" style="text-align: left; margin-top: 100px">
+    <img src="{% static 'weather/images/weather_logo.png' %}" class="image" style="float:left; width:100px; margin-right:20px; margin-left:100px ">
+    <h1 class="display-5">Halo</h1>
+    <h5>The Day Is Mine When The Ring Shines</h5>
+
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <form method="post" class="col-md">
+      {% csrf_token %}
+      <div class=" input-group">
+        <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </nav>
+  <br> <br>
+  <div class="row">
+    {% if city and dt and country and coord and temp and pressure and humidity %}
+    <div class="col d-flex justify-content-center">
+      <div class=" card text-white bg-dark mb-6">
+        <div class=" card-body" >
+          <h4><span class="badge badge-primary">Location :</span> {{city}}, {{country}}</h4>
+          <h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{coord}}</h4>
+          <h4><span class="badge badge-primary">Last Updated :</span> {{dt}}</h4>
+          <h4><span class="badge badge-primary">Temperature :</span> {{temp}}</h4>
+          <h4><span class="badge badge-primary">Pressure :</span> {{pressure}} </h4>
+          <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}</h4>
+          <h4><span class="badge badge-primary">Forecast : </span> {{main}} <img
+              src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
+          <h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
+    <div class="container">
+      <a href="#" class="navbar-brand">Weather App</a>
+      <h5>Powered By:</h5>
+      <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
+    </div>
+  </div>
+{% endblock content%}
+
+</html>
