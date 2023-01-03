@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Multiple Pizza</title>
+</head>
+<body>
+  <h1>Order Pizzas Here</h1>
+  <h2>{{ note }}</h2>
+
+  <form action="{% url 'pizzas' %}" method="post">
+    {% csrf_token%}
+    {{ formset.management_form }}
+
+    {% for form in formset %}
+    {{ form }}
+    <br><br>
+    {% endfor %}
+    <input type="submit" value="Order Pizzas">
+  </form>
+</body>
+</html>
